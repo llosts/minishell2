@@ -1,0 +1,740 @@
+[822]
+NAME="brother | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "echo brother"
+[822-END]
+
+[823]
+NAME="gymbro | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "echo gymbro"
+[823-END]
+
+[901]
+NAME="Nothing | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo ''
+[901-END]
+
+[902]
+NAME="Exec two command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls /etc'
+  echo 'cat /etc/resolv.conf'
+[902-END]
+
+[903]
+NAME="Testing with /usr/bin PATH | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'pwd'
+[903-END]
+
+[904]
+NAME="Testing with /bin PATH | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin'"
+CLEAN=""
+TESTS=
+  echo 'pwd'
+[904-END]
+
+[905]
+NAME="run commands | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cat /etc/resolv.conf'
+  sleep 0.5
+  echo 'ls -l /etc'
+  sleep 0.5
+  echo 'pwd'
+[905-END]
+
+[906]
+NAME="setenv and unsetenv | Minishell 1"
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
+TESTS=
+  echo 'unsetenv HOSTTYPE'
+  echo 'setenv var1 val1'
+  echo 'setenv var2 val2'
+[906-END]
+
+[907]
+NAME="builtin cd | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ..'
+  echo 'ls -l'
+  echo 'cd /usr'
+  echo 'ls -l'
+[907-END]
+
+[908]
+NAME="many tab and space | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo -e "\t\t    ls\t     \t-l    \t\t  \t -a /usr   \t\t"
+[908-END]
+
+[909]
+NAME="Launch DivZero program with core dump | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "./my_divzero"
+[909-END]
+
+
+[910]
+NAME="return of shell | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "cd caca"
+[910-END]
+
+[911]
+NAME="return of shell after bad inst | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "cd caca"
+    echo "ls -l"
+[911-END]
+
+[912]
+NAME="ls nofile | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "ls nofile"
+[912-END]
+
+[913]
+NAME="cd - | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+TESTS=
+  echo 'cd ..'
+  echo 'cd -'
+  echo 'cd -'
+  echo 'cd -'
+  echo 'ls'
+[913-END]
+
+[914]
+NAME="segfault | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "./segfault/a.out"
+[914-END]
+
+[915]
+NAME="setenv with letter | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "setenv 4coucou coucou"
+[915-END]
+
+[916]
+NAME="setenv with non alpha | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo "setenv coucou: coucou"
+[916-END]
+
+[917]
+NAME="setenv 1 arg | Minishell 1"
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
+TESTS=
+    echo "setenv coucou"
+[917-END]
+
+[918]
+NAME="Test cd back | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd ..'
+    echo 'ls -l'
+    echo 'cd -'
+    echo 'ls -l'
+[918-END]
+
+[919]
+NAME="Test cd vague | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd ~'
+    echo 'ls -l'
+    echo 'cd -'
+    echo 'ls -l'
+[919-END]
+
+[920]
+NAME="Test cd empty | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd'
+    echo 'ls -l'
+    echo 'cd -'
+    echo 'ls -l'
+[920-END]
+
+[921]
+NAME="Test create disp and delete files | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'touch test'
+    echo 'cat test'
+    echo 'rm test'
+[921-END]
+
+[922]
+NAME="ls bad files | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'ls nofile'
+[922-END]
+
+[923]
+NAME="2 set env same name | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'setenv KL'
+    echo 'setenv KL'
+[923-END]
+
+[924]
+NAME="cd ~ test | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd ~noexist'
+[924-END]
+
+[925]
+NAME="cd on files | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd /bin/ls'
+[925-END]
+
+[926]
+NAME="cd on no such files | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd taleskramptest'
+[926-END]
+
+[927]
+NAME="setenv with no alpha char | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'setenv lpdz4=/okdzé'
+[927-END]
+
+[928]
+NAME="setenv With start number | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'setenv 4klfe'
+[928-END]
+
+[929]
+NAME="cd root | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd /root'
+[929-END]
+
+[930]
+NAME="setenv good . and _ | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'setenv _test'
+    echo 'setenv fekl.fekl'
+[930-END]
+
+[931]
+NAME="unsetenv without parametres | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'unsetenv'
+[931-END]
+
+[932]
+NAME="no right test | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'touch test'
+    echo 'chmod 000 test'
+    echo 'rm test'
+[932-END]
+
+[933]
+NAME="final test ultimate de la mort | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'cd my_printf'
+    echo 'cd /usr/bin'
+    echo 'cd -'
+    echo 'ls'
+    echo 'cd ..'
+    echo 'ls'
+[933-END]
+
+[934]
+NAME="segfault/a.out | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'segfault/a.out'
+[934-END]
+
+[935]
+NAME=" exec format | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+    echo 'segfault/coucou.out'
+[935-END]
+
+[936]
+NAME="Test cd vers un répertoire existant | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /var/log'
+  echo 'ls'
+[936-END]
+
+[937]
+NAME="Test cd vers un répertoire parent | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ..'
+  echo 'ls'
+[937-END]
+
+[938]
+NAME="Test cd vers un répertoire enfant | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /var/log/apache2'
+  echo 'ls'
+[938-END]
+
+[939]
+NAME="Test cd vers le répertoire personnel | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ~'
+  echo 'ls'
+[939-END]
+
+[940]
+NAME="Test cd vers un répertoire spécifié par un chemin relatif | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ../../usr/bin'
+  echo 'ls'
+[940-END]
+
+[941]
+NAME="Test cd vers un répertoire inexistant | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd non_existent_directory'
+  echo 'ls'
+[941-END]
+
+[942]
+NAME="Test cd sans argument pour revenir au répertoire précédent | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ..'
+  echo 'cd -'
+  echo 'ls'
+[942-END]
+
+[943]
+NAME="Test cd avec plusieurs arguments | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /var /usr'
+  echo 'ls'
+[943-END]
+
+[946]
+NAME="setenv avec un nom de variable non alphanumérique | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv 4coucou coucou'
+  echo 'ls'
+[946-END]
+
+[947]
+NAME="setenv avec un nom de variable commençant par un chiffre | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv 1variable valeur'
+  echo 'ls'
+[947-END]
+
+[948]
+NAME="setenv avec un nom de variable contenant des caractères spéciaux | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv variable valeur'
+  echo 'ls'
+[948-END]
+
+[949]
+NAME="setenv avec un nom de variable vide | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv "" valeur'
+  echo 'ls'
+[949-END]
+
+[950]
+NAME="setenv avec une valeur vide | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv variable ""'
+  echo 'ls'
+[950-END]
+
+[951]
+NAME="setenv _ | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv _e_ coucou'
+  echo 'ls'
+[951-END]
+
+[952]
+NAME="setenv avec un trop grand nombre d'arguments | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv variable valeur trop d arguments'
+  echo 'ls'
+[952-END]
+
+[953]
+NAME="setenv avec une variable déjà existante | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv variable1 valeur1'
+  echo 'setenv variable1 valeur2'
+  echo 'ls'
+[953-END]
+
+[954]
+NAME="cd dans un fichier | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd main.c'
+  echo 'ls'
+[954-END]
+
+[955]
+NAME="cd avec trop d'arguments | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd my_printf ressources'
+  echo 'ls'
+[955-END]
+
+[956]
+NAME="cd avec un argument vide | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ""'
+  echo 'ls'
+[956-END]
+
+[957]
+NAME="cd vers un répertoire sans permission de lecture | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'chmod -rwx segfault'
+  echo 'cd segfault'
+  echo 'ls'
+[957-END]
+
+[958]
+NAME="cd vers un fichier sans permission de lecture | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'chmod -rwx temp.txt'
+  echo 'cd temp.txt'
+  echo 'ls'
+[958-END]
+
+[959]
+NAME="cd dans un répertoire inexistant | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd prout_inexistant'
+  echo 'ls'
+[959-END]
+
+[960]
+NAME="Trying to read a non-existing file | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cat nonexistentfile.txt'
+[960-END]
+
+[961]
+NAME="Invalid option for command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls --invalid-option'
+[961-END]
+
+[962]
+NAME="Trying to remove a directory without permission | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'rm -rf /root'
+[962-END]
+
+[963]
+NAME="Invalid syntax for setenv | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv var1=value1 var2'
+[963-END]
+
+[964]
+NAME="Invalid syntax for unsetenv | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'unsetenv var1 var2'
+[964-END]
+
+[965]
+NAME="Invalid syntax for command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'invalid_command --invalid-option'
+[965-END]
+
+[966]
+NAME="Trying to execute a non-executable file | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cat /etc/passwd'
+[966-END]
+
+[967]
+NAME="Invalid number of arguments for command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls -l -a -t -r invalid_argument'
+[967-END]
+
+[968]
+NAME="Invalid number of arguments for built-in command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv var1 var2 var3'
+[968-END]
+
+[969]
+NAME="Trying to change directory to a file | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /etc/passwd'
+[969-END]
+
+[970]
+NAME="Access denied | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls'
+[970-END]
+
+[971]
+NAME="Invalid environment variable name | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv 123invalid_var'
+[971-END]
+
+[972]
+NAME="Trying to unset a non-existing environment variable | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'unsetenv NON_EXISTING_VAR'
+[972-END]
+
+[973]
+NAME="Trying to execute a non-existing program | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'non_existing_program'
+[973-END]
+
+[974]
+NAME="Trying to read a directory | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cat /bin'
+[974-END]
+
+[975]
+NAME="Trying to execute a directory | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo '/bin'
+[975-END]
+
+[976]
+NAME="Invalid arguments for built-in command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd dffdghbjk'
+[976-END]
+
+[977]
+NAME="Invalid file or directory for cd | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /path/to/nonexistent/directory'
+[977-END]
+
+[978]
+NAME="Executing a non-executable file | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cat /etc/passwd'
+[978-END]
+
+[979]
+NAME="Invalid syntax for setenv | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv var1=value1 var2'
+[979-END]
+
+[980]
+NAME="Invalid syntax for unsetenv | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'unsetenv var1 var2'
+[980-END]
+
+[981]
+NAME="Trying to execute a non-existing program | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'non_existing_program'
+[981-END]
+
+[982]
+NAME="Invalid number of arguments for a command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls -l -a -t -r invalid_argument'
+[982-END]
+
+[983]
+NAME="Invalid number of arguments for built-in command | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'setenv var1 var2 var3'
+[983-END]
+
+[984]
+NAME="Trying to change directory to a file | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd /etc/passwd'
+[984-END]
+
+[985]
+NAME="cd ~/Documents | Minishell 1"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo 'cd ~/Documents'
+[985-END]
