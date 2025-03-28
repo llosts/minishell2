@@ -33,6 +33,7 @@ make clean      # Remove object files
 make fclean     # Remove object files and executable
 make re         # Recompile the program
 make debug      # Compile with debug flags
+make bonus      # Compile with the bonus features
 ```
 
 ## Usage
