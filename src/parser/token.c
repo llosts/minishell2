@@ -35,10 +35,6 @@ static void add_command_to_list(command_list_t **head, command_t *cmd)
 
 static token_list_t *handle_input_redirect(token_list_t *token, command_t *cmd)
 {
-    if (!token->next) {
-        print_error("Missing name for redirect.\n", 0);
-        return token;
-    }
     cmd->in_file = my_strdup(token->next->token);
     cmd->heredoc = false;
     return token->next;
@@ -47,10 +43,6 @@ static token_list_t *handle_input_redirect(token_list_t *token, command_t *cmd)
 static token_list_t *handle_heredoc_redirect(token_list_t *token,
     command_t *cmd)
 {
-    if (!token->next) {
-        print_error("Missing name for redirect.\n", 0);
-        return token;
-    }
     cmd->in_file = my_strdup(token->next->token);
     cmd->heredoc = true;
     return token->next;
@@ -59,10 +51,6 @@ static token_list_t *handle_heredoc_redirect(token_list_t *token,
 static token_list_t *handle_output_redirect(token_list_t *token,
     command_t *cmd)
 {
-    if (!token->next) {
-        print_error("Missing name for redirect.\n", 0);
-        return token;
-    }
     cmd->out_file = my_strdup(token->next->token);
     cmd->append = false;
     return token->next;
@@ -71,10 +59,6 @@ static token_list_t *handle_output_redirect(token_list_t *token,
 static token_list_t *handle_append_redirect(token_list_t *token,
     command_t *cmd)
 {
-    if (!token->next) {
-        print_error("Missing name for redirect.\n", 0);
-        return token;
-    }
     cmd->out_file = my_strdup(token->next->token);
     cmd->append = true;
     return token->next;
@@ -82,8 +66,12 @@ static token_list_t *handle_append_redirect(token_list_t *token,
 
 static token_list_t *process_redirect(token_list_t *token, command_t *cmd)
 {
-    if (!token || !token->next)
+    if (!token)
         return NULL;
+    if (!token->next) {
+        print_error("Missing name for redirect.\n", 1);
+        return NULL;
+    }
     switch (token->type) {
         case REDIRECT_OUT:
             return handle_output_redirect(token, cmd);
@@ -159,6 +147,8 @@ command_list_t *build_command_list(token_list_t *tokens)
             free_command_list(cmd_list);
             return NULL;
         }
+        if (!token)
+            return NULL;
         token = token->next;
     }
     finalize_command_list(&cmd_list, current_cmd);

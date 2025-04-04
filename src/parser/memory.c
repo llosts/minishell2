@@ -18,6 +18,8 @@ void free_token_list(token_list_t *head)
 {
     token_list_t *temp = NULL;
 
+    if (!head)
+        return;
     while (head != NULL) {
         temp = head;
         head = head->next;

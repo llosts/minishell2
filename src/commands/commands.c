@@ -85,8 +85,10 @@ int execute_command_line(shell_state_t *shell, char *input)
         return SUCCESS;
     commands = build_command_list(tokens);
     free_token_list(tokens);
-    if (!commands)
+    if (!commands) {
+        shell->last_exit_status = 1;
         return SUCCESS;
+    }
     result = execute_commands(shell, commands);
     shell->last_exit_status = result;
     free_command_list(commands);
