@@ -50,19 +50,3 @@ int wait_for_pipe_children(pid_t *pids, int cmd_count)
     }
     return result;
 }
-
-/*int validate_command_list(command_list_t *cmd_list)
-{
-    command_list_t *current = cmd_list;
-
-    while (current != NULL) {
-        if (current->cmd->piped &&
-                (current->next == NULL ||
-                current->next->cmd->arg_count == 0)) {
-            print_error("Invalid null command.\n", 1);
-            return 0;
-        }
-        current = current->next;
-    }
-    return 1;
-}*/
